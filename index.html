@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriAI — Smart Diet Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{
+      --bg:#f5f6fa;--surface:#ffffff;--card:#ffffff;--border:#e2e5f1;
+      --accent:#5b52f0;--accent2:#ff4d6d;--accent3:#0fb888;--accent4:#e8a020;
+      --text:#1a1d2e;--muted:#6b7280;--danger:#e03030;
+      --green:#16a34a;--orange:#d97706;--red:#dc2626;
+      --radius:14px;--radius-sm:8px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+    /* ── NAV ── */
+    nav{background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 8px rgba(0,0,0,.08);padding:0 32px;display:flex;align-items:center;gap:8px;height:60px;position:sticky;top:0;z-index:100;}
+    .logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--accent);margin-right:auto;}
+    .logo span{color:var(--accent3);}
+    .nav-tab{background:none;border:none;color:var(--muted);padding:8px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:.85rem;font-weight:500;transition:.2s;}
+    .nav-tab:hover,.nav-tab.active{color:var(--text);background:#ededfa;}
+    .nav-tab.active{color:var(--accent);}
+
+    /* ── LAYOUT ── */
+    .page{display:none;padding:28px 32px;max-width:1300px;margin:0 auto;}
+    .page.active{display:block;}
+    h2{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;margin-bottom:6px;}
+    .subtitle{color:var(--muted);font-size:.9rem;margin-bottom:24px;}
+
+    /* ── GRID CARDS ── */
+    .grid{display:grid;gap:20px;}
+    .g2{grid-template-columns:repeat(2,1fr);}
+    .g3{grid-template-columns:repeat(3,1fr);}
+    .g4{grid-template-columns:repeat(4,1fr);}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+    .card-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px;}
+
+    /* ── FORM ── */
+    .form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+    label{font-size:.82rem;color:var(--muted);display:block;margin-bottom:5px;}
+    input,select{width:100%;background:#f9fafc;border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);padding:9px 12px;font-size:.88rem;outline:none;transition:.2s;}
+    input:focus,select:focus{border-color:var(--accent);}
+    .form-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+    .section-header{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .section-header .badge{font-size:.7rem;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;font-family:'DM Sans',sans-serif;}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-size:.88rem;font-weight:600;transition:.2s;}
+    .btn-primary{background:var(--accent);color:#fff;}
+    .btn-primary:hover{background:#5a52e0;}
+    .btn-secondary{background:#ffffff;border:1px solid var(--border);color:var(--text);}
+    .btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+    .btn-danger{background:var(--danger);color:#fff;}
+    .btn-sm{padding:5px 11px;font-size:.78rem;}
+    .btn-xs{padding:3px 8px;font-size:.73rem;border-radius:4px;}
+
+    /* ── STATS ── */
+    .stat-value{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;}
+    .stat-label{font-size:.78rem;color:var(--muted);margin-top:2px;}
+    .stat-sub{font-size:.82rem;color:var(--accent3);margin-top:4px;}
+
+    /* ── MACRO BAR ── */
+    .macro-bar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:8px 0;}
+    .macro-seg{transition:width .5s;}
+
+    /* ── FOOD CARDS ── */
+    .food-card{background:#f8f9ff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;transition:.2s;}
+    .food-card:hover{border-color:var(--accent);background:#f3f2ff;}
+    .food-name{font-weight:600;font-size:.95rem;margin-bottom:6px;}
+    .food-macros{display:flex;gap:10px;font-size:.78rem;color:var(--muted);}
+    .food-macros span{display:flex;align-items:center;gap:3px;}
+    .food-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.7rem;font-weight:600;}
+    .tag-veg{background:#1a4a2e;color:#4caf50;}
+    .tag-nveg{background:#4a1a1a;color:#ff6b6b;}
+    .tag-vgn{background:#1a3a4a;color:#43d9ad;}
+    .tag-pesc{background:#1a2a4a;color:#7bb8f5;}
+
+    /* ── SUITABILITY BADGE ── */
+    .suit-excellent{background:#dcfce7;color:#15803d;border-radius:99px;padding:2px 10px;font-size:.72rem;font-weight:700;}
+    .suit-good{background:#ecfccb;color:#4d7c0f;border-radius:99px;padding:2px 10px;font-size:.72rem;font-weight:700;}
+    .suit-moderate{background:#fef9c3;color:#a16207;border-radius:99px;padding:2px 10px;font-size:.72rem;font-weight:700;}
+    .suit-avoid{background:#fee2e2;color:#b91c1c;border-radius:99px;padding:2px 10px;font-size:.72rem;font-weight:700;}
+
+    /* ── MEAL PLAN ── */
+    .meal-section{margin-bottom:20px;}
+    .meal-header{font-size:.85rem;font-weight:600;color:var(--accent3);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+    .meal-header::before{content:'';display:block;width:12px;height:12px;border-radius:50%;background:var(--accent3);}
+
+    /* ── WEEKLY TABS ── */
+    .week-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+    .week-tab{padding:5px 14px;border-radius:99px;font-size:.8rem;cursor:pointer;border:1px solid var(--border);background:#f0f1f8;color:var(--muted);transition:.2s;}
+    .week-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+    /* ── ALERTS / INSIGHTS ── */
+    .insight{padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:8px;font-size:.85rem;border-left:3px solid var(--accent3);background:rgba(15,184,136,.06);}
+    .warning{border-left-color:var(--danger);background:rgba(255,71,87,.07);}
+    .disease-note{border-left-color:var(--accent4);background:rgba(247,183,49,.07);}
+
+    /* ── FOOD DB TABLE ── */
+    .table-wrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--border);}
+    table{width:100%;border-collapse:collapse;font-size:.82rem;}
+    thead th{background:#f4f5fb;padding:10px 12px;text-align:left;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase;border-bottom:1px solid var(--border);}
+    tbody tr{border-bottom:1px solid rgba(0,0,0,.06);cursor:pointer;transition:.15s;}
+    tbody tr:hover{background:rgba(108,99,255,.07);}
+    tbody tr.selected{background:rgba(108,99,255,.15);}
+    td{padding:8px 12px;}
+
+    /* ── DISEASE PANEL ── */
+    .disease-panel{background:linear-gradient(135deg,rgba(224,48,48,.06),rgba(91,82,240,.06));border:1px solid rgba(224,48,48,.2);border-radius:var(--radius);padding:20px;margin-bottom:20px;}
+    .disease-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--accent4);margin-bottom:10px;}
+
+    /* ── PROGRESS BAR ── */
+    .progress{background:#e9eaf5;border-radius:99px;height:8px;overflow:hidden;margin:6px 0;}
+    .progress-fill{height:100%;border-radius:99px;transition:width .6s;}
+
+    /* ── RISK CARD ── */
+    .risk-card{border-radius:var(--radius);padding:16px;margin-bottom:16px;}
+    .risk-balanced{background:rgba(67,217,173,.1);border:1px solid rgba(67,217,173,.3);}
+    .risk-low-carb{background:rgba(247,183,49,.1);border:1px solid rgba(247,183,49,.3);}
+    .risk-low-sodium{background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.3);}
+    .risk-label{font-size:1.2rem;font-weight:700;font-family:'Fraunces',serif;}
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent);color:#fff;padding:12px 24px;border-radius:99px;font-size:.88rem;font-weight:600;transition:.3s;z-index:999;opacity:0;}
+    #toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+    /* ── LOADER ── */
+    .loader{display:inline-block;width:20px;height:20px;border:2px solid rgba(108,99,255,.3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── PHASE TIMELINE ── */
+    .phase{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;}
+    .phase-icon{font-size:1.4rem;flex-shrink:0;width:36px;text-align:center;}
+    .phase-info{}
+    .phase-name{font-weight:700;font-size:.9rem;}
+    .phase-weeks{font-size:.78rem;color:var(--accent3);margin:2px 0;}
+    .phase-focus{font-size:.82rem;color:var(--muted);}
+
+    /* ── HYDRATION ── */
+    .hydration-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.07);font-size:.83rem;}
+    .hydration-item:last-child{border:none;}
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar{width:6px;height:6px;}
+    ::-webkit-scrollbar-track{background:var(--bg);}
+    ::-webkit-scrollbar-thumb{background:#c5c9de;border-radius:3px;}
+
+    @media(max-width:768px){
+      nav{padding:0 16px;gap:4px;}
+      .page{padding:16px;}
+      .g2,.g3,.g4{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Nutri<span>AI</span></div>
+  <button class="nav-tab active" onclick="showPage('plan')">🧮 Planner</button>
+  <button class="nav-tab" onclick="showPage('menu')">🍽️ Food Menu</button>
+  <button class="nav-tab" onclick="showPage('weekly')">📅 Weekly Plan</button>
+  <button class="nav-tab" onclick="showPage('insights')">💡 Insights</button>
+  <button class="nav-tab" onclick="showPage('foods')">🗄️ Database</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════
+  PAGE: PLANNER
+══════════════════════════════════════════════════ -->
+<div class="page active" id="page-plan">
+  <h2>Diet Planner</h2>
+  <p class="subtitle">Enter your details and health conditions to get a personalised AI-powered nutrition plan.</p>
+
+  <!-- Personal Info -->
+  <div class="form-section">
+    <div class="section-header">👤 Personal Information</div>
+    <div class="form-grid">
+      <div><label>Age (years)</label><input type="number" id="age" value="30" min="10" max="100"></div>
+      <div><label>Weight (kg)</label><input type="number" id="weight" value="75" min="30" max="300"></div>
+      <div><label>Height (cm)</label><input type="number" id="height" value="170" min="100" max="250"></div>
+      <div><label>Gender</label>
+        <select id="gender"><option value="male">Male</option><option value="female">Female</option></select>
+      </div>
+      <div><label>Activity Level</label>
+        <select id="activity">
+          <option value="sedentary">Sedentary (desk job)</option>
+          <option value="lightly_active">Lightly Active (1–3×/wk)</option>
+          <option value="moderately_active" selected>Moderately Active (3–5×/wk)</option>
+          <option value="very_active">Very Active (6–7×/wk)</option>
+          <option value="extra_active">Extra Active (athlete)</option>
+        </select>
+      </div>
+      <div><label>Goal</label>
+        <select id="goal">
+          <option value="lose_weight">Lose Weight</option>
+          <option value="maintenance" selected>Maintenance</option>
+          <option value="build_muscle">Build Muscle</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preferences -->
+  <div class="form-section">
+    <div class="section-header">🌍 Preferences</div>
+    <div class="form-grid">
+      <div><label>Country</label>
+        <select id="country">
+          <option value="Pakistan" selected>Pakistan</option>
+          <option value="India">India</option>
+          <option value="Global">Global</option>
+          <option value="All">All</option>
+        </select>
+      </div>
+      <div><label>Season</label>
+        <select id="season">
+          <option value="All" selected>All Seasons</option>
+          <option value="Summer">Summer</option>
+          <option value="Winter">Winter</option>
+          <option value="Spring">Spring</option>
+        </select>
+      </div>
+      <div><label>Budget</label>
+        <select id="budget">
+          <option value="Low" selected>Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+      <div><label>Diet Type</label>
+        <select id="diet_type">
+          <option value="Non-Veg" selected>Non-Vegetarian</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Pescatarian">Pescatarian</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Conditions -->
+  <div class="form-section">
+    <div class="section-header">⚕️ Health Conditions <span class="badge">NEW</span></div>
+    <div class="form-grid">
+      <div><label>Disease / Condition</label>
+        <select id="disease" onchange="onDiseaseChange()">
+          <option value="">None</option>
+          <option value="Diabetes">Diabetes</option>
+          <option value="Hypertension">Hypertension</option>
+          <option value="Obesity">Obesity</option>
+          <option value="Heart Disease">Heart Disease</option>
+        </select>
+      </div>
+      <div><label>Severity</label>
+        <select id="severity">
+          <option value="Mild">Mild</option>
+          <option value="Moderate">Moderate</option>
+          <option value="Severe">Severe</option>
+        </select>
+      </div>
+      <div id="glucose-wrap"><label>Fasting Glucose (mg/dL)</label><input type="number" id="glucose" value="95" min="60" max="500"></div>
+      <div id="chol-wrap"><label>Cholesterol (mg/dL)</label><input type="number" id="cholesterol" value="180" min="100" max="400"></div>
+      <div id="bp-wrap"><label>Systolic BP (mmHg)</label><input type="number" id="systolic_bp" value="120" min="80" max="220"></div>
+      <div><label>Exercise Hours/Week</label><input type="number" id="exercise_hours" value="3" min="0" max="40"></div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;">
+    <button class="btn btn-primary" onclick="getDiet()">
+      <span id="btn-loader" style="display:none" class="loader"></span>
+      ✨ Generate Plan
+    </button>
+    <button class="btn btn-secondary" onclick="resetForm()">↺ Reset</button>
+  </div>
+
+  <!-- Results -->
+  <div id="results" style="display:none;">
+
+    <!-- Disease Protocol Banner -->
+    <div id="disease-banner" style="display:none;" class="disease-panel">
+      <div class="disease-title" id="disease-banner-title"></div>
+      <div id="disease-notes"></div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="grid g4" style="margin-bottom:20px;">
+      <div class="card"><div class="card-title">TDEE</div><div class="stat-value" id="r-tdee">—</div><div class="stat-label">kcal/day</div></div>
+      <div class="card"><div class="card-title">Target Calories</div><div class="stat-value" id="r-cal">—</div><div class="stat-label" id="r-cal-label">kcal/day</div></div>
+      <div class="card"><div class="card-title">BMI</div><div class="stat-value" id="r-bmi">—</div><div class="stat-sub" id="r-bmi-cat">—</div></div>
+      <div class="card"><div class="card-title">Body Fat</div><div class="stat-value" id="r-bf">—</div><div class="stat-sub" id="r-lean">Lean mass</div></div>
+    </div>
+
+    <!-- Macros + Risk -->
+    <div class="grid g2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-title">Macronutrient Targets</div>
+        <div class="macro-bar" id="macro-bar"></div>
+        <div id="macro-legend" style="display:flex;gap:14px;font-size:.8rem;margin-bottom:12px;"></div>
+        <div id="macro-details"></div>
+        <canvas id="macroChart" height="180"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">AI Health-Risk Prediction</div>
+        <div id="risk-display"></div>
+        <div class="card-title" style="margin-top:16px;">Body Composition</div>
+        <div id="body-comp"></div>
+      </div>
+    </div>
+
+    <!-- Meal Plan -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title" style="margin-bottom:16px;">Today's Meal Plan</div>
+      <div id="meal-plan"></div>
+    </div>
+
+    <!-- Snacks + Foods -->
+    <div class="grid g2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-title">Recommended Foods</div>
+        <div id="r-foods"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Healthy Snacks</div>
+        <div id="r-snacks"></div>
+      </div>
+    </div>
+
+    <!-- Duration + Hydration -->
+    <div class="grid g2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-title">Programme Duration</div>
+        <div id="r-duration"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Hydration Plan 💧</div>
+        <div id="r-hydration"></div>
+      </div>
+    </div>
+
+  </div><!-- /results -->
+</div>
+
+<!-- ══════════════════════════════════════════════════
+  PAGE: FOOD MENU
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-menu">
+  <h2>Food Menu</h2>
+  <p class="subtitle">Browse available foods. Each food is rated for your health condition. Click a food to see details or select for a custom plan.</p>
+
+  <div class="form-section" style="margin-bottom:16px;">
+    <div class="form-grid">
+      <div><label>Search</label><input type="text" id="menu-q" placeholder="Search food name…" oninput="loadMenu()"></div>
+      <div><label>Disease Filter</label>
+        <select id="menu-disease" onchange="loadMenu()">
+          <option value="">No filter</option>
+          <option value="Diabetes">Diabetes</option>
+          <option value="Hypertension">Hypertension</option>
+          <option value="Obesity">Obesity</option>
+          <option value="Heart Disease">Heart Disease</option>
+        </select>
+      </div>
+      <div><label>Diet Type</label>
+        <select id="menu-diet" onchange="loadMenu()">
+          <option value="">All</option>
+          <option value="Non-Veg">Non-Veg</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+        </select>
+      </div>
+      <div><label>Country</label>
+        <select id="menu-country" onchange="loadMenu()">
+          <option value="">All</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="India">India</option>
+          <option value="Global">Global</option>
+        </select>
+      </div>
+      <div><label>Budget</label>
+        <select id="menu-budget" onchange="loadMenu()">
+          <option value="">All</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:8px;">
+        <button class="btn btn-secondary btn-sm" onclick="loadMenu()">🔍 Filter</button>
+        <button class="btn btn-primary btn-sm" onclick="validateSelection()" id="validate-btn" style="display:none;">✅ Validate Selection</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-selected-bar" style="display:none;background:rgba(91,82,240,.06);border:1px solid rgba(91,82,240,.25);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:.85rem;display:flex;align-items:center;justify-content:space-between;">
+    <span id="menu-selected-count">0 foods selected</span>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-primary btn-sm" onclick="validateSelection()">✅ Check Suitability</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearMenuSelection()">✕ Clear</button>
+    </div>
+  </div>
+
+  <div id="validation-result" style="display:none;" class="card" style="margin-bottom:16px;"></div>
+
+  <div id="menu-stats" style="color:var(--muted);font-size:.82rem;margin-bottom:12px;"></div>
+  <div id="menu-grid" class="grid g3"></div>
+  <div id="menu-pagination" style="display:flex;gap:8px;margin-top:16px;justify-content:center;"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+  PAGE: WEEKLY PLAN
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-weekly">
+  <h2>7-Day Meal Plan</h2>
+  <p class="subtitle">Your personalised weekly rotation — no repeated meals, optimised for your health profile.</p>
+
+  <div id="weekly-empty" style="text-align:center;padding:60px 20px;color:var(--muted);">
+    <div style="font-size:3rem;margin-bottom:12px;">📅</div>
+    Generate a diet plan first from the <strong>Planner</strong> tab.
+  </div>
+  <div id="weekly-content" style="display:none;">
+    <div class="week-tabs" id="week-tabs"></div>
+    <div id="week-day-content"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+  PAGE: INSIGHTS
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-insights">
+  <h2>Health Insights</h2>
+  <p class="subtitle">AI-generated health insights, warnings, and micronutrient targets based on your profile.</p>
+
+  <div id="insights-empty" style="text-align:center;padding:60px 20px;color:var(--muted);">
+    <div style="font-size:3rem;margin-bottom:12px;">💡</div>
+    Generate a diet plan first from the <strong>Planner</strong> tab.
+  </div>
+  <div id="insights-content" style="display:none;">
+    <div class="grid g2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-title">⚠️ Warnings</div>
+        <div id="ins-warnings"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">✅ Health Insights</div>
+        <div id="ins-insights"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title">💊 Micronutrient Daily Targets</div>
+      <div id="ins-micros" class="grid g3"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📅 Programme Phases</div>
+      <div id="ins-phases"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+  PAGE: FOOD DATABASE
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-foods">
+  <h2>Food Database</h2>
+  <p class="subtitle">Browse, add, or remove foods from the database. Select rows to build a custom meal plan.</p>
+
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
+    <input type="text" id="foodSearch" placeholder="Search…" style="max-width:220px;" oninput="filterFoods()">
+    <select id="foodFilterDiet" onchange="filterFoods()" style="max-width:160px;">
+      <option value="">All Types</option>
+      <option value="non-veg">Non-Veg</option>
+      <option value="vegetarian">Vegetarian</option>
+      <option value="vegan">Vegan</option>
+    </select>
+    <span id="foodDbCount" style="color:var(--muted);font-size:.82rem;margin-left:auto;"></span>
+  </div>
+
+  <div id="selected-bar" style="display:none;background:rgba(91,82,240,.06);border:1px solid rgba(91,82,240,.25);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;font-size:.85rem;display:flex;align-items:center;justify-content:space-between;">
+    <span id="selected-count">0 selected</span>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-primary btn-sm" onclick="planFromSelected()">📋 Plan From Selection</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearSelection()">✕ Clear</button>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:20px;">
+    <table>
+      <thead><tr>
+        <th>Name</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fiber</th><th>Sodium</th><th>Type</th><th></th>
+      </tr></thead>
+      <tbody id="foodTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Add food form -->
+  <div class="form-section">
+    <div class="section-header">➕ Add New Food</div>
+    <div class="form-grid">
+      <div><label>Name *</label><input type="text" id="newName" placeholder="e.g. Chicken Breast"></div>
+      <div><label>Calories *</label><input type="number" id="newCal" placeholder="kcal"></div>
+      <div><label>Protein (g) *</label><input type="number" id="newProt" placeholder="g"></div>
+      <div><label>Carbs (g) *</label><input type="number" id="newCarbs" placeholder="g"></div>
+      <div><label>Fat (g) *</label><input type="number" id="newFat" placeholder="g"></div>
+      <div><label>Fiber (g)</label><input type="number" id="newFiber" placeholder="g" value="0"></div>
+      <div><label>Sodium (mg)</label><input type="number" id="newSodium" placeholder="mg" value="0"></div>
+      <div><label>Diet Type</label>
+        <select id="newDiet">
+          <option value="Non-Veg">Non-Veg</option><option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option><option value="Pescatarian">Pescatarian</option>
+        </select>
+      </div>
+      <div><label>Country</label><input type="text" id="newCountry" value="Global"></div>
+      <div><label>Budget</label>
+        <select id="newBudget"><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select>
+      </div>
+      <div><label>Micronutrients</label><input type="text" id="newMicro" placeholder="Iron;Zinc;..."></div>
+    </div>
+    <button class="btn btn-primary" style="margin-top:14px;" onclick="addFood()">➕ Add Food</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+const API = 'http://127.0.0.1:5003';
+let lastResult = null;
+let selectedFoods = new Set();
+let menuSelectedFoods = new Set();
+let currentWeekData = null;
+let allFoods = [];
+let menuPage = 1;
+let macroChart = null;
+
+// ────────────────────────────────────────────
+//  NAVIGATION
+// ────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+
+  if (id === 'menu') loadMenu();
+  if (id === 'foods') loadFoods();
+}
+
+function showToast(msg, isErr = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = isErr ? 'var(--danger)' : 'var(--accent)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function onDiseaseChange() {
+  const d = document.getElementById('disease').value;
+  const show = d !== '';
+  ['glucose-wrap','chol-wrap','bp-wrap'].forEach(id => {
+    document.getElementById(id).style.opacity = show ? '1' : '.4';
+  });
+}
+
+function resetForm() {
+  ['age','weight','height'].forEach(id => {
+    document.getElementById(id).value = {age:30,weight:75,height:170}[id];
+  });
+  document.getElementById('gender').value = 'male';
+  document.getElementById('activity').value = 'moderately_active';
+  document.getElementById('goal').value = 'maintenance';
+  document.getElementById('disease').value = '';
+  document.getElementById('results').style.display = 'none';
+}
+
+// ────────────────────────────────────────────
+//  GET DIET
+// ────────────────────────────────────────────
+async function getDiet() {
+  const btn = document.querySelector('[onclick="getDiet()"]');
+  const ldr = document.getElementById('btn-loader');
+  btn.disabled = true; ldr.style.display = 'inline-block';
+
+  const payload = {
+    age:       +document.getElementById('age').value,
+    weight:    +document.getElementById('weight').value,
+    height:    +document.getElementById('height').value,
+    gender:    document.getElementById('gender').value,
+    activity:  document.getElementById('activity').value,
+    goal:      document.getElementById('goal').value,
+    country:   document.getElementById('country').value,
+    season:    document.getElementById('season').value,
+    budget:    document.getElementById('budget').value,
+    diet_type: document.getElementById('diet_type').value,
+    disease:   document.getElementById('disease').value || null,
+    severity:  document.getElementById('severity').value,
+    glucose:   +document.getElementById('glucose').value,
+    cholesterol: +document.getElementById('cholesterol').value,
+    systolic_bp: +document.getElementById('systolic_bp').value,
+    exercise_hours: +document.getElementById('exercise_hours').value,
+    custom_foods: [...selectedFoods],
+  };
+
+  try {
+    const res  = await fetch(`${API}/get_diet`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+
+    if (data.status !== 'success') {
+      showToast(data.message || 'Error', true); return;
+    }
+    lastResult = data;
+    renderResults(data);
+    showToast('Plan generated!');
+  } catch (e) {
+    showToast('Cannot connect to Flask server. Run: python app.py', true);
+  } finally {
+    btn.disabled = false; ldr.style.display = 'none';
+  }
+}
+
+function renderResults(d) {
+  const macros = d.adjusted_macros || d.macros;
+  document.getElementById('results').style.display = 'block';
+
+  // Stats
+  document.getElementById('r-tdee').textContent = d.tdee.toLocaleString();
+  document.getElementById('r-cal').textContent  = macros.target_calories.toLocaleString();
+  document.getElementById('r-cal-label').textContent = macros.disease_protocol
+    ? macros.disease_protocol + ' Protocol' : 'kcal/day';
+  document.getElementById('r-bmi').textContent  = d.bmi;
+  document.getElementById('r-bmi-cat').textContent = d.bmi_category;
+  document.getElementById('r-bf').textContent   = d.body_comp.body_fat_pct + '%';
+  document.getElementById('r-lean').textContent = `Lean: ${d.body_comp.lean_mass_kg} kg`;
+
+  // Disease banner
+  if (macros.disease_protocol) {
+    document.getElementById('disease-banner').style.display = 'block';
+    document.getElementById('disease-banner-title').textContent =
+      `⚕️ ${d.disease} Protocol: ${macros.disease_protocol}`;
+    const notes = document.getElementById('disease-notes');
+    notes.innerHTML = (macros.disease_notes || []).map(n =>
+      `<div class="insight disease-note" style="margin-bottom:6px;">${n}</div>`
+    ).join('');
+  } else {
+    document.getElementById('disease-banner').style.display = 'none';
+  }
+
+  // Macros chart
+  renderMacroChart(macros);
+
+  // Risk
+  renderRisk(d.health_risk, d.disease);
+
+  // Body comp
+  const bc = d.body_comp;
+  document.getElementById('body-comp').innerHTML = `
+    <div class="hydration-item"><span>Body Fat</span><strong>${bc.body_fat_pct}%</strong></div>
+    <div class="hydration-item"><span>Fat Mass</span><strong>${bc.fat_mass_kg} kg</strong></div>
+    <div class="hydration-item"><span>Lean Mass</span><strong>${bc.lean_mass_kg} kg</strong></div>
+    <div class="hydration-item"><span>Ideal Weight</span><strong>${bc.ideal_weight_kg} kg</strong></div>
+    <div class="hydration-item"><span>To Goal</span><strong style="color:${bc.weight_to_lose_gain>0?'var(--danger)':'var(--accent3)'}">
+      ${bc.weight_to_lose_gain > 0 ? '-' : '+'}${Math.abs(bc.weight_to_lose_gain)} kg</strong></div>
+  `;
+
+  // Meal plan
+  renderMealPlan(d.meal_plan, 'meal-plan', d.disease);
+
+  // Foods
+  document.getElementById('r-foods').innerHTML = (d.foods || []).map(f => foodCard(f, d.disease)).join('');
+  document.getElementById('r-snacks').innerHTML = (d.snacks || []).map(f => foodCard(f, d.disease)).join('');
+
+  // Duration
+  renderDuration(d.duration);
+
+  // Hydration
+  renderHydration(d.hydration);
+
+  // Weekly
+  if (d.weekly_plan) {
+    currentWeekData = d.weekly_plan;
+    renderWeeklyTabs(d.disease);
+    document.getElementById('weekly-empty').style.display = 'none';
+    document.getElementById('weekly-content').style.display = 'block';
+  }
+
+  // Insights
+  renderInsights(d.health, d.micronutrients, d.duration);
+
+  window.scrollTo({top: document.getElementById('results').offsetTop - 80, behavior: 'smooth'});
+}
+
+function renderMacroChart(macros) {
+  const p = macros.target_protein_g;
+  const c = macros.target_carbs_g;
+  const f = macros.target_fat_g;
+  const total = p*4 + c*4 + f*9;
+
+  const pp = Math.round(p*4/total*100);
+  const cp = Math.round(c*4/total*100);
+  const fp = 100-pp-cp;
+
+  document.getElementById('macro-bar').innerHTML = `
+    <div class="macro-seg" style="width:${pp}%;background:#6c63ff;"></div>
+    <div class="macro-seg" style="width:${cp}%;background:#43d9ad;"></div>
+    <div class="macro-seg" style="width:${fp}%;background:#f7b731;"></div>
+  `;
+  document.getElementById('macro-legend').innerHTML = `
+    <span style="color:#6c63ff;">● Protein ${pp}%</span>
+    <span style="color:#43d9ad;">● Carbs ${cp}%</span>
+    <span style="color:#f7b731;">● Fat ${fp}%</span>
+  `;
+  document.getElementById('macro-details').innerHTML = `
+    <div class="hydration-item"><span>Protein</span><strong>${p}g (${p*4} kcal)</strong></div>
+    <div class="hydration-item"><span>Carbs</span><strong>${c}g (${c*4} kcal)</strong></div>
+    <div class="hydration-item"><span>Fat</span><strong>${f}g (${f*9} kcal)</strong></div>
+    <div class="hydration-item"><span>Fiber target</span><strong>${macros.target_fiber_g}g</strong></div>
+  `;
+
+  if (macroChart) macroChart.destroy();
+  const ctx = document.getElementById('macroChart').getContext('2d');
+  macroChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Protein','Carbs','Fat'],
+      datasets:[{data:[p*4,c*4,f*9],backgroundColor:['#6c63ff','#43d9ad','#f7b731'],borderWidth:0}]
+    },
+    options:{responsive:true,cutout:'70%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed} kcal`}}}}
+  });
+}
+
+function renderRisk(risk, disease) {
+  if (!risk) { document.getElementById('risk-display').innerHTML = '<p style="color:var(--muted)">No prediction available.</p>'; return; }
+  const cls = {
+    'Balanced':'risk-balanced','Low_Carb':'risk-low-carb','Low_Sodium':'risk-low-sodium'
+  }[risk.protocol] || 'risk-balanced';
+
+  const probHtml = Object.entries(risk.probabilities || {}).map(([k,v]) => `
+    <div style="margin-bottom:6px;">
+      <div style="display:flex;justify-content:space-between;font-size:.78rem;"><span>${k.replace('_',' ')}</span><span>${(v*100).toFixed(1)}%</span></div>
+      <div class="progress"><div class="progress-fill" style="width:${v*100}%;background:${k===risk.protocol?'var(--accent)':'var(--border)'}"></div></div>
+    </div>
+  `).join('');
+
+  document.getElementById('risk-display').innerHTML = `
+    <div class="risk-card ${cls}">
+      <div class="risk-label">${risk.protocol.replace('_',' ')}</div>
+      <div style="font-size:.8rem;color:var(--muted);margin:4px 0;">Confidence: ${(risk.confidence*100).toFixed(1)}%</div>
+      ${disease ? `<div style="font-size:.8rem;color:var(--accent4);margin-top:6px;">⚕️ Adjusted for ${disease}</div>` : ''}
+    </div>
+    <div style="margin-top:12px;">${probHtml}</div>
+  `;
+}
+
+function foodCard(f, disease) {
+  const s = f.suitability || {};
+  const sClass = {Excellent:'suit-excellent',Good:'suit-good',Moderate:'suit-moderate',Avoid:'suit-avoid'}[s.rating] || 'suit-moderate';
+  const flags = (s.flags || []).map(fl => `<span style="font-size:.68rem;color:var(--muted);margin-right:4px;">${fl}</span>`).join('');
+
+  return `
+    <div class="food-card" style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div class="food-name">${f.name}</div>
+        ${s.rating ? `<span class="${sClass}">${s.rating}</span>` : ''}
+      </div>
+      <div class="food-macros">
+        <span>🔥 ${f.calories} kcal</span>
+        <span>💪 ${f.protein}g</span>
+        <span>🌾 ${f.carbs}g</span>
+        <span>🧈 ${f.fat}g</span>
+        ${f.fiber ? `<span>🌿 ${f.fiber}g fiber</span>` : ''}
+      </div>
+      ${flags ? `<div style="margin-top:5px;">${flags}</div>` : ''}
+      ${f.gi_level ? `<div style="font-size:.72rem;color:var(--muted);margin-top:3px;">GI: ${f.gi_level}${f.sodium_mg?` | Na: ${f.sodium_mg}mg`:''}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderMealPlan(plan, targetId, disease) {
+  const meals = {breakfast:'🌅 Breakfast',lunch:'☀️ Lunch',dinner:'🌙 Dinner'};
+  let html = '';
+  for (const [key, label] of Object.entries(meals)) {
+    const m = plan[key]; if (!m) continue;
+    html += `
+      <div class="meal-section">
+        <div class="meal-header">${label} — Target: ${m.target_calories} kcal</div>
+        <div class="grid g3">
+          ${(m.foods || []).map(f => foodCard(f, disease)).join('')}
+        </div>
+      </div>
+    `;
+  }
+  document.getElementById(targetId).innerHTML = html;
+}
+
+function renderDuration(dur) {
+  if (!dur) return;
+  let html = `
+    <div style="display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap;">
+      <div><div class="stat-value" style="font-size:1.6rem;">${dur.recommended_weeks}w</div><div class="stat-label">Duration</div></div>
+      <div><div class="stat-value" style="font-size:1.6rem;color:var(--accent3);">${dur.expected_change}</div><div class="stat-label">Expected Change</div></div>
+      <div><div class="stat-value" style="font-size:1.6rem;color:var(--accent4);">${(dur.hydration_ml/1000).toFixed(1)}L</div><div class="stat-label">Daily Water</div></div>
+    </div>
+    <div style="margin-bottom:12px;">${(dur.phases||[]).map(p=>`
+      <div class="phase">
+        <div class="phase-icon">${p.icon||'📌'}</div>
+        <div class="phase-info">
+          <div class="phase-name">${p.name}</div>
+          <div class="phase-weeks">Weeks ${p.weeks}</div>
+          <div class="phase-focus">${p.focus}</div>
+        </div>
+      </div>
+    `).join('')}</div>
+    <div class="insight">${dur.tip||''}</div>
+    ${dur.disease_note ? `<div class="insight disease-note" style="margin-top:8px;">${dur.disease_note}</div>` : ''}
+    <div style="margin-top:10px;font-size:.8rem;color:var(--muted);">📋 ${dur.check_in||''}</div>
+    ${dur.review_at_weeks ? `<div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Review at weeks: ${dur.review_at_weeks.join(', ')}</div>` : ''}
+  `;
+  document.getElementById('r-duration').innerHTML = html;
+}
+
+function renderHydration(hyd) {
+  if (!hyd) return;
+  let html = `
+    <div style="display:flex;gap:20px;margin-bottom:14px;">
+      <div><div class="stat-value" style="font-size:1.6rem;color:var(--accent3);">${hyd.total_litres}L</div><div class="stat-label">Daily Target</div></div>
+      <div><div class="stat-value" style="font-size:1.6rem;">${hyd.total_ml}</div><div class="stat-label">ml/day</div></div>
+    </div>
+    ${(hyd.schedule||[]).filter(s=>s.ml>0).map(s=>`
+      <div class="hydration-item"><span>${s.time}</span><div><strong>${s.ml} ml</strong> <span style="color:var(--muted);font-size:.75rem;">${s.note}</span></div></div>
+    `).join('')}
+  `;
+  document.getElementById('r-hydration').innerHTML = html;
+}
+
+// ────────────────────────────────────────────
+//  WEEKLY PAGE
+// ────────────────────────────────────────────
+function renderWeeklyTabs(disease) {
+  if (!currentWeekData) return;
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  document.getElementById('week-tabs').innerHTML = currentWeekData.map((d,i) => `
+    <div class="week-tab ${i===0?'active':''}" onclick="showWeekDay(${i},'${disease||''}',this)">
+      ${days[i]} <span style="font-size:.7rem;color:var(--muted);">${d.day_total_calories||0} kcal</span>
+    </div>
+  `).join('');
+  showWeekDay(0, disease || '', document.querySelector('.week-tab'));
+}
+
+function showWeekDay(idx, disease, el) {
+  document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const day = currentWeekData[idx];
+  let html = `<div style="font-size:.85rem;color:var(--muted);margin-bottom:14px;">Day ${day.day} — ${day.day_total_calories||0} kcal total | Protein: ${day.day_total_protein||0}g</div>`;
+  const meals = {breakfast:'🌅 Breakfast',lunch:'☀️ Lunch',dinner:'🌙 Dinner'};
+  for (const [key, label] of Object.entries(meals)) {
+    const m = day.meals[key]; if (!m) continue;
+    html += `
+      <div class="meal-section">
+        <div class="meal-header">${label} — ${m.target_calories} kcal</div>
+        <div class="grid g3">${(m.foods||[]).map(f=>foodCard(f,disease)).join('')}</div>
+      </div>
+    `;
+  }
+  document.getElementById('week-day-content').innerHTML = html;
+}
+
+// ────────────────────────────────────────────
+//  INSIGHTS PAGE
+// ────────────────────────────────────────────
+function renderInsights(health, micros, dur) {
+  document.getElementById('insights-empty').style.display = 'none';
+  document.getElementById('insights-content').style.display = 'block';
+
+  const warns = (health?.warnings || []);
+  document.getElementById('ins-warnings').innerHTML = warns.length
+    ? warns.map(w => `<div class="insight warning">${w}</div>`).join('')
+    : '<p style="color:var(--muted);font-size:.85rem;">No critical warnings.</p>';
+
+  document.getElementById('ins-insights').innerHTML =
+    (health?.insights || []).map(i => `<div class="insight">${i}</div>`).join('');
+
+  if (micros) {
+    document.getElementById('ins-micros').innerHTML =
+      Object.entries(micros).map(([k,v]) => `
+        <div class="card" style="padding:14px;">
+          <div style="font-size:.78rem;color:var(--muted);">${k}</div>
+          <div style="font-size:1.2rem;font-weight:700;font-family:'Fraunces',serif;">${v}</div>
+        </div>
+      `).join('');
+  }
+
+  if (dur) {
+    document.getElementById('ins-phases').innerHTML =
+      (dur.phases || []).map(p => `
+        <div class="phase">
+          <div class="phase-icon">${p.icon||'📌'}</div>
+          <div class="phase-info">
+            <div class="phase-name">${p.name}</div>
+            <div class="phase-weeks">Weeks ${p.weeks}</div>
+            <div class="phase-focus">${p.focus}</div>
+          </div>
+        </div>
+      `).join('');
+  }
+}
+
+// ────────────────────────────────────────────
+//  FOOD MENU PAGE
+// ────────────────────────────────────────────
+async function loadMenu() {
+  menuPage = 1;
+  await fetchMenu();
+}
+
+async function fetchMenu(page = 1) {
+  const q        = document.getElementById('menu-q').value;
+  const disease  = document.getElementById('menu-disease').value;
+  const diet     = document.getElementById('menu-diet').value;
+  const country  = document.getElementById('menu-country').value;
+  const budget   = document.getElementById('menu-budget').value;
+
+  const params = new URLSearchParams();
+  if (q)       params.set('q', q);
+  if (disease) params.set('disease', disease);
+  if (diet)    params.set('diet_type', diet);
+  if (country) params.set('country', country);
+  if (budget)  params.set('budget', budget);
+  params.set('page', page);
+  params.set('page_size', 30);
+
+  try {
+    const res  = await fetch(`${API}/food_menu?${params}`);
+    const data = await res.json();
+
+    document.getElementById('menu-stats').textContent =
+      `${data.total || 0} foods found — Page ${data.page||1} of ${data.total_pages||1}`;
+
+    const grid = document.getElementById('menu-grid');
+    grid.innerHTML = (data.items || []).map(f => menuFoodCard(f, disease)).join('');
+
+    // Pagination
+    const pag = document.getElementById('menu-pagination');
+    if ((data.total_pages || 1) > 1) {
+      let pages = '';
+      for (let i = 1; i <= data.total_pages; i++) {
+        pages += `<button class="btn btn-sm ${i===page?'btn-primary':'btn-secondary'}" onclick="fetchMenu(${i})">${i}</button>`;
+      }
+      pag.innerHTML = pages;
+    } else {
+      pag.innerHTML = '';
+    }
+  } catch (e) {
+    document.getElementById('menu-grid').innerHTML =
+      '<p style="color:var(--muted);">Cannot connect to Flask server.</p>';
+  }
+}
+
+function menuFoodCard(f, disease) {
+  const s = f.suitability || {};
+  const sClass = {Excellent:'suit-excellent',Good:'suit-good',Moderate:'suit-moderate',Avoid:'suit-avoid'}[s.rating] || '';
+  const isSelected = menuSelectedFoods.has(f.name);
+
+  return `
+    <div class="food-card" id="menu-card-${f.name.replace(/\W/g,'_')}"
+         style="${isSelected?'border-color:var(--accent);background:rgba(108,99,255,.1);':''}"
+         onclick="toggleMenuSelect('${f.name.replace(/'/g,"\\'")}',this)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div class="food-name">${f.name}</div>
+        ${s.rating ? `<span class="${sClass}">${s.rating}</span>` : ''}
+      </div>
+      <div class="food-macros">
+        <span>🔥 ${f.calories}</span><span>💪 ${f.protein}g P</span>
+        <span>🌾 ${f.carbs}g C</span><span>🧈 ${f.fat}g F</span>
+      </div>
+      ${f.fiber ? `<div style="font-size:.72rem;color:var(--muted);margin-top:3px;">Fiber: ${f.fiber}g | Na: ${f.sodium_mg}mg</div>` : ''}
+      ${f.gi_level ? `<div style="font-size:.72rem;color:var(--muted);">GI: ${f.gi_level}</div>` : ''}
+      ${(s.flags||[]).map(fl=>`<span style="font-size:.68rem;color:var(--muted);">${fl} </span>`).join('')}
+      ${f.health_goals ? `<div style="font-size:.7rem;color:var(--accent3);margin-top:3px;">${f.health_goals}</div>` : ''}
+      <div style="margin-top:8px;display:flex;gap:6px;">
+        <button class="btn btn-xs btn-secondary" onclick="event.stopPropagation();findSimilar('${f.name.replace(/'/g,"\\'")}')">Similar</button>
+        ${s.score ? `<span style="font-size:.72rem;color:var(--muted);margin-top:4px;">Score: ${s.score}/100</span>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function toggleMenuSelect(name, el) {
+  if (menuSelectedFoods.has(name)) {
+    menuSelectedFoods.delete(name);
+    el.style.borderColor = '';
+    el.style.background = '';
+  } else {
+    menuSelectedFoods.add(name);
+    el.style.borderColor = 'var(--accent)';
+    el.style.background = 'rgba(108,99,255,.1)';
+  }
+  updateMenuSelectionBar();
+}
+
+function updateMenuSelectionBar() {
+  const bar = document.getElementById('menu-selected-bar');
+  const cnt = document.getElementById('menu-selected-count');
+  if (menuSelectedFoods.size > 0) {
+    bar.style.display = 'flex';
+    cnt.textContent = `${menuSelectedFoods.size} food${menuSelectedFoods.size>1?'s':''} selected`;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+function clearMenuSelection() {
+  menuSelectedFoods.clear();
+  document.getElementById('menu-selected-bar').style.display = 'none';
+  document.getElementById('validation-result').style.display = 'none';
+  fetchMenu(menuPage);
+}
+
+async function validateSelection() {
+  const disease = document.getElementById('menu-disease').value;
+  const macros = lastResult?.adjusted_macros || lastResult?.macros;
+
+  try {
+    const res = await fetch(`${API}/validate_foods`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        food_names: [...menuSelectedFoods],
+        disease: disease || null,
+        macros: macros,
+      })
+    });
+    const data = await res.json();
+    renderValidation(data);
+  } catch(e) {
+    showToast('Validation failed – is Flask running?', true);
+  }
+}
+
+function renderValidation(data) {
+  const el = document.getElementById('validation-result');
+  el.style.display = 'block';
+
+  const tot = data.totals || {};
+  const cmp = data.comparison || {};
+
+  let html = `<div class="card-title">Selection Analysis</div>
+  <div class="grid g4" style="margin-bottom:14px;">
+    <div><div class="card-title">Calories</div><div class="stat-value" style="font-size:1.4rem;">${tot.calories||0}</div>
+      ${cmp.calories_diff !== undefined ? `<div style="font-size:.75rem;color:${Math.abs(cmp.calories_diff)<200?'var(--accent3)':'var(--danger)'};">${cmp.calories_diff>0?'+':''}${cmp.calories_diff} vs target</div>`:''}
+    </div>
+    <div><div class="card-title">Protein</div><div class="stat-value" style="font-size:1.4rem;">${tot.protein||0}g</div></div>
+    <div><div class="card-title">Carbs</div><div class="stat-value" style="font-size:1.4rem;">${tot.carbs||0}g</div></div>
+    <div><div class="card-title">Sodium</div><div class="stat-value" style="font-size:1.4rem;">${tot.sodium_mg||0}mg</div></div>
+  </div>
+  <div class="grid g3">
+    ${(data.foods||[]).map(f=>{
+      const s=f.suitability||{};
+      const cls={Excellent:'suit-excellent',Good:'suit-good',Moderate:'suit-moderate',Avoid:'suit-avoid'}[s.rating]||'';
+      return `<div class="food-card">
+        <div style="display:flex;justify-content:space-between;">
+          <div class="food-name">${f.name}</div>
+          ${s.rating?`<span class="${cls}">${s.rating}</span>`:''}
+        </div>
+        <div class="food-macros"><span>🔥 ${f.calories||0}</span><span>💪 ${f.protein||0}g</span></div>
+        ${(s.flags||[]).map(fl=>`<div style="font-size:.7rem;color:var(--muted);">${fl}</div>`).join('')}
+        ${f.status==='not_found'?`<div style="color:var(--danger);font-size:.75rem;">Not found in DB</div>`:''}
+      </div>`;
+    }).join('')}
+  </div>`;
+
+  el.innerHTML = html;
+}
+
+async function findSimilar(name) {
+  const disease = document.getElementById('menu-disease').value;
+  try {
+    const res  = await fetch(`${API}/similar_foods?name=${encodeURIComponent(name)}&n=5&disease=${disease}`);
+    const data = await res.json();
+    if (data.status === 'success') {
+      const modal = document.createElement('div');
+      modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;';
+      modal.innerHTML = `
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:16px;">
+            <div style="font-family:'Fraunces',serif;font-size:1.1rem;">Similar to: <strong>${name}</strong></div>
+            <button onclick="this.closest('div[style]').remove()" class="btn btn-sm btn-secondary">✕</button>
+          </div>
+          <div class="grid g2">${(data.similar_foods||[]).map(f=>menuFoodCard(f,disease)).join('')}</div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+  } catch(e) { showToast('Could not load similar foods', true); }
+}
+
+// ────────────────────────────────────────────
+//  FOOD DATABASE PAGE
+// ────────────────────────────────────────────
+async function loadFoods() {
+  try {
+    const res  = await fetch(`${API}/get_foods`);
+    const data = await res.json();
+    if (data.status === 'success') {
+      allFoods = data.foods;
+      renderFoodTable(allFoods);
+      document.getElementById('foodDbCount').textContent = `${data.total} foods in database`;
+    }
+  } catch(e) {
+    document.getElementById('foodDbCount').textContent = 'Cannot connect — start Flask server.';
+  }
+}
+
+function tagClass(dt) {
+  if (!dt) return 'nveg';
+  const d = dt.toLowerCase();
+  if (d === 'vegan') return 'vgn';
+  if (d === 'vegetarian') return 'veg';
+  if (d === 'pescatarian') return 'pesc';
+  return 'nveg';
+}
+
+function renderFoodTable(foods) {
+  const tbody = document.getElementById('foodTableBody');
+  if (!foods.length) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:20px">No foods found</td></tr>';
+    return;
+  }
+  tbody.innerHTML = foods.map(f => `
+    <tr onclick="toggleFoodSelect('${f.name.replace(/'/g,"\\'")}',this)" class="${selectedFoods.has(f.name)?'selected':''}">
+      <td><strong>${f.name}</strong></td>
+      <td>${f.calories}</td>
+      <td>${f.protein}g</td>
+      <td>${f.carbs}g</td>
+      <td>${f.fat}g</td>
+      <td>${f.fiber||0}g</td>
+      <td>${f.sodium_mg||0}</td>
+      <td><span class="food-tag tag-${tagClass(f.diet_type)}">${f.diet_type}</span></td>
+      <td><button class="btn btn-sm" style="background:var(--danger);color:#fff;"
+          onclick="event.stopPropagation();removeFood('${f.name.replace(/'/g,"\\'")}')">✕</button></td>
+    </tr>
+  `).join('');
+}
+
+function filterFoods() {
+  const q    = document.getElementById('foodSearch').value.toLowerCase();
+  const diet = document.getElementById('foodFilterDiet').value.toLowerCase();
+  renderFoodTable(allFoods.filter(f => {
+    return (!q || f.name.toLowerCase().includes(q)) &&
+           (!diet || f.diet_type?.toLowerCase() === diet);
+  }));
+}
+
+function toggleFoodSelect(name, row) {
+  if (selectedFoods.has(name)) { selectedFoods.delete(name); row.classList.remove('selected'); }
+  else                         { selectedFoods.add(name);    row.classList.add('selected'); }
+  updateSelectionBar();
+}
+
+function updateSelectionBar() {
+  const bar = document.getElementById('selected-bar');
+  bar.style.display = selectedFoods.size > 0 ? 'flex' : 'none';
+  document.getElementById('selected-count').textContent = `${selectedFoods.size} selected`;
+}
+
+function clearSelection() {
+  selectedFoods.clear();
+  document.querySelectorAll('#foodTableBody tr.selected').forEach(r => r.classList.remove('selected'));
+  updateSelectionBar();
+}
+
+async function planFromSelected() {
+  if (!selectedFoods.size) { showToast('Select at least one food first', true); return; }
+  const age      = +document.getElementById('age').value;
+  const weight   = +document.getElementById('weight').value;
+  const height   = +document.getElementById('height').value;
+  const gender   = document.getElementById('gender').value;
+  const activity = document.getElementById('activity').value;
+  const goal     = document.getElementById('goal').value;
+  const disease  = document.getElementById('disease').value;
+
+  try {
+    const res  = await fetch(`${API}/plan_from_foods`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({age,weight,height,gender,activity,goal,
+                            food_list:[...selectedFoods], disease: disease||null})
+    });
+    const data = await res.json();
+    if (data.status === 'success') {
+      showToast('Plan generated! Switch to Planner to see meal plan.');
+      // Inject into results
+      if (document.getElementById('results').style.display === 'block') {
+        renderMealPlan(data.meal_plan, 'meal-plan', disease);
+      }
+    } else {
+      showToast(data.message || 'Error', true);
+    }
+  } catch(e) { showToast('Connection error', true); }
+}
+
+async function addFood() {
+  const payload = {
+    name:     document.getElementById('newName').value,
+    calories: +document.getElementById('newCal').value,
+    protein:  +document.getElementById('newProt').value,
+    carbs:    +document.getElementById('newCarbs').value,
+    fat:      +document.getElementById('newFat').value,
+    fiber:    +document.getElementById('newFiber').value,
+    sodium_mg:+document.getElementById('newSodium').value,
+    diet_type: document.getElementById('newDiet').value,
+    country:  document.getElementById('newCountry').value,
+    budget:   document.getElementById('newBudget').value,
+    micronutrients: document.getElementById('newMicro').value,
+  };
+  if (!payload.name || !payload.calories) { showToast('Name and calories are required', true); return; }
+
+  try {
+    const res  = await fetch(`${API}/add_food`, {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.status === 'success') {
+      showToast(data.message);
+      loadFoods();
+      document.getElementById('newName').value = '';
+    } else {
+      showToast(data.message, true);
+    }
+  } catch(e) { showToast('Connection error', true); }
+}
+
+async function removeFood(name) {
+  if (!confirm(`Remove "${name}" from database?`)) return;
+  try {
+    const res  = await fetch(`${API}/remove_food`, {
+      method: 'DELETE', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({name})
+    });
+    const data = await res.json();
+    showToast(data.message || 'Removed', data.status !== 'success');
+    if (data.status === 'success') loadFoods();
+  } catch(e) { showToast('Connection error', true); }
+}
+
+// ────────────────────────────────────────────
+//  INIT
+// ────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  onDiseaseChange();
+});
+</script>
+</body>
+</html>
