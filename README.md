@@ -1,0 +1,1 @@
+This project is an AI-based system that provides personalized diet recommendations based on user inputs such as age, weight, height, activity level, and health goals. It uses a machine learning approach to analyze user data and suggest suitable diet plans for maintaining or improving health. The system aims to make nutrition planning simple, data-driven, and personalized.
