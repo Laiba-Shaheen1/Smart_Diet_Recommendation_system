@@ -22,7 +22,7 @@ if HAS_CORS:
 
 DATA_PATH         = "foods_data.csv"
 CALORIE_DATA_PATH = "calorie_calculator_diet_dataset.csv"
-PATIENT_DATA_PATH = "diet_recommendations_dataset.csv"
+PATIENT_DATA_PATH = "diet_recommendations_dataset_.csv"
 
 engine = DietRecommendationEngine(
     data_path=DATA_PATH,
@@ -74,6 +74,8 @@ def get_diet():
 
         # Disease / health indicators
         disease     = data.get("disease",     None)
+        if not disease or disease in ("", "None"):
+            disease = None
         severity    = data.get("severity",    "Mild")
         glucose     = data.get("glucose",     None)
         cholesterol = data.get("cholesterol", None)
