@@ -1,139 +1,130 @@
-name,calories,protein,carbs,fat,diet_type,country,season,budget,fiber,sodium_mg,micronutrients,diabetes_friendly_flag,bp_friendly_flag,glycemic_index_val,meal_type_tag,health_goal_tag,allergens_tag,prep_difficulty_tag
-Dal Chawal,350,14,60,5,Vegetarian,Pakistan,All,Low,8,420,Iron;Folate;Zinc,0,0,Medium,,,,
-Roti,120,4,25,1,Vegetarian,Pakistan,All,Low,2,180,B vitamins;Iron,0,0,Medium,,,,
-Aloo Sabzi,180,4,30,6,Vegan,Pakistan,All,Low,4,300,Potassium;Vitamin C,0,0,Medium,,,,
-Chana Masala,270,13,40,7,Vegan,Pakistan,All,Low,10,380,Iron;Folate;Magnesium,0,0,Medium,,,,
-Dal Tadka,200,10,28,6,Vegan,Pakistan,All,Low,7,350,Iron;Zinc;B6,0,0,Medium,,,,
-Paratha,200,5,30,8,Vegetarian,Pakistan,All,Low,2,280,B vitamins,0,0,Medium,,,,
-Lassi,180,8,25,5,Vegetarian,Pakistan,Summer,Low,0,120,Calcium;Probiotics;B12,0,0,Medium,,,,
-Saag,150,6,18,7,Vegetarian,Pakistan,Winter,Low,5,290,Vitamin K;Iron;Folate,0,0,Medium,,,,
-Haleem,300,20,25,12,Non-Veg,Pakistan,Winter,Low,5,450,Iron;Zinc;B12,0,0,Medium,,,,
-Nihari,400,30,10,28,Non-Veg,Pakistan,Winter,Medium,2,520,Iron;B12;Zinc,0,0,Medium,,,,
-Biryani,450,25,55,15,Non-Veg,Pakistan,All,Medium,3,480,B12;Iron;Zinc,0,0,Medium,,,,
-Chicken Karahi,320,28,8,20,Non-Veg,Pakistan,All,Medium,1,430,B12;Selenium;Zinc,0,0,Medium,,,,
-Seekh Kebab,220,18,5,14,Non-Veg,Pakistan,All,Medium,1,390,B12;Iron;Selenium,0,0,Medium,,,,
-Chapli Kebab,250,16,8,18,Non-Veg,Pakistan,All,Medium,1,400,B12;Zinc,0,0,Medium,,,,
-Fruit Chaat,120,2,28,1,Vegan,Pakistan,Summer,Low,4,80,Vitamin C;Antioxidants,0,0,Medium,,,,
-Sattu Drink,150,6,28,2,Vegan,Pakistan,Summer,Low,5,200,Iron;B vitamins,0,0,Medium,,,,
-Aam Panna,80,1,20,0,Vegan,Pakistan,Summer,Low,1,50,Vitamin C;Antioxidants,0,0,Medium,,,,
-Doodh Pati Chai,120,5,15,5,Vegetarian,Pakistan,Winter,Low,0,80,Calcium;B12,0,0,Medium,,,,
-Aloo Keema,280,18,20,14,Non-Veg,Pakistan,All,Low,3,420,B12;Iron;Zinc,0,0,Medium,,,,
-Macaroni,250,8,40,7,Vegetarian,Pakistan,All,Low,2,350,B vitamins,0,0,Medium,,,,
-Anday ka Paratha,280,12,28,14,Vegetarian,Pakistan,All,Low,2,380,B12;Selenium,0,0,Medium,,,,
-Dahi,60,4,5,3,Vegetarian,Pakistan,Summer,Low,0,50,Calcium;Probiotics;B12,0,0,Medium,,,,
-Khichdi,220,8,38,4,Vegan,Pakistan,Winter,Low,5,300,Iron;B vitamins,0,0,Medium,,,,
-Palak Gosht,310,22,12,18,Non-Veg,Pakistan,Winter,Medium,4,430,Iron;Vitamin K;B12,0,0,Medium,,,,
-Shahi Tukray,400,10,55,18,Vegetarian,Pakistan,Winter,Medium,1,280,Calcium;B12,0,0,Medium,,,,
-Egg Bhurji,200,14,5,13,Vegetarian,Pakistan,All,Low,0,350,B12;Selenium;Choline,0,0,Medium,,,,
-Chicken Pulao,380,26,48,12,Non-Veg,Pakistan,All,Medium,2,460,B12;Zinc;Iron,0,0,Medium,,,,
-Mutton Stew,360,28,15,22,Non-Veg,Pakistan,Winter,Medium,2,450,B12;Iron;Zinc,0,0,Medium,,,,
-Fish Curry Pak,290,24,12,16,Pescatarian,Pakistan,All,Medium,2,400,Omega3;B12;Selenium,0,0,Medium,,,,
-Achar,30,1,5,1,Vegan,Pakistan,All,Low,1,800,Probiotics,0,0,Medium,,,,
-Zarda,350,5,72,8,Vegetarian,Pakistan,All,Low,1,200,B vitamins,0,0,Medium,,,,
-Paye,380,28,12,26,Non-Veg,Pakistan,Winter,Medium,0,480,Collagen;B12;Zinc,0,0,Medium,,,,
-Chicken Handi,340,29,10,22,Non-Veg,Pakistan,All,Medium,1,430,B12;Selenium;Zinc,0,0,Medium,,,,
-Mix Vegetables,160,5,24,5,Vegan,Pakistan,All,Low,6,250,"Vitamins A,C,K",0,0,Medium,,,,
-Sohan Halwa,420,6,68,16,Vegetarian,Pakistan,Winter,Medium,1,150,B vitamins,0,0,Medium,,,,
-Mutton Biryani,480,30,55,18,Non-Veg,Pakistan,All,High,3,520,B12;Iron;Zinc,0,0,Medium,,,,
-Dahi Bhallay,220,10,28,7,Vegetarian,Pakistan,Summer,Low,2,380,Calcium;Probiotics,0,0,Medium,,,,
-Chaat Papri,280,7,40,10,Vegetarian,Pakistan,Summer,Low,3,450,Vitamin C,0,0,Medium,,,,
-Fried Fish,320,26,12,18,Pescatarian,Pakistan,All,Medium,1,450,Omega3;B12,0,0,Medium,,,,
-Mattar Pulao,350,10,58,8,Vegetarian,Pakistan,All,Low,5,380,Iron;Folate,0,0,Medium,,,,
-Korma,420,28,15,28,Non-Veg,Pakistan,Winter,High,2,480,B12;Zinc;Iron,0,0,Medium,,,,
-Spaghetti Bolognese,480,28,58,16,Non-Veg,Global,All,Medium,4,550,B12;Iron;Zinc,0,0,Medium,,,,
-Grilled Chicken Breast,165,31,0,4,Non-Veg,Global,All,Low,0,75,B12;Selenium;Niacin,0,0,Medium,,,,
-Salmon Fillet,208,22,0,13,Pescatarian,Global,All,Medium,0,59,Omega3;B12;Vitamin D,0,0,Medium,,,,
-Boiled Eggs,78,6,1,5,Vegetarian,Global,All,Low,0,62,B12;Choline;Selenium,0,0,Medium,,,,
-Greek Yogurt,130,17,9,0,Vegetarian,Global,All,Low,0,65,Calcium;Probiotics;B12,0,0,Medium,,,,
-Oatmeal,158,6,27,3,Vegan,Global,All,Low,4,9,Iron;Magnesium;B vitamins,0,0,Medium,,,,
-Brown Rice,218,5,46,2,Vegan,Global,All,Low,4,10,Magnesium;B vitamins,0,0,Medium,,,,
-Quinoa,222,8,39,4,Vegan,Global,All,Medium,5,13,Iron;Magnesium;Folate,0,0,Medium,,,,
-Sweet Potato,103,2,24,0,Vegan,Global,All,Low,4,41,Vitamin A;Potassium;C,0,0,Medium,,,,
-Broccoli,55,4,11,1,Vegan,Global,All,Low,5,33,Vitamin C;K;Folate,0,0,Medium,,,,
-Spinach Salad,30,3,4,0,Vegan,Global,All,Low,2,65,Iron;Folate;Vitamin K,0,0,Medium,,,,
-Avocado Toast,280,7,28,16,Vegan,Global,All,Medium,8,320,Folate;Potassium;E,0,0,Medium,,,,
-Banana,89,1,23,0,Vegan,Global,All,Low,3,1,Potassium;B6;C,0,0,Medium,,,,
-Apple,95,0,25,0,Vegan,Global,All,Low,4,2,Fiber;Vitamin C;Antioxidants,0,0,Medium,,,,
-Almonds,164,6,6,14,Vegan,Global,All,Medium,4,1,Vitamin E;Magnesium;Calcium,0,0,Medium,,,,
-Walnuts,185,4,4,18,Vegan,Global,All,Medium,2,1,Omega3;Magnesium;B6,0,0,Medium,,,,
-Peanut Butter Toast,280,12,30,14,Vegetarian,Global,All,Low,3,300,Niacin;Magnesium;B6,0,0,Medium,,,,
-Tuna Salad,200,28,5,8,Pescatarian,Global,All,Low,1,450,Omega3;B12;Selenium,0,0,Medium,,,,
-Lentil Soup,230,18,38,2,Vegan,Global,All,Low,16,400,Iron;Folate;Potassium,0,0,Medium,,,,
-Black Bean Bowl,310,15,48,6,Vegan,Global,All,Low,14,480,Iron;Folate;Magnesium,0,0,Medium,,,,
-Chickpea Curry,280,12,42,8,Vegan,Global,All,Low,10,420,Iron;Folate;Zinc,0,0,Medium,,,,
-Tofu Stir Fry,210,16,18,10,Vegan,Global,All,Low,4,480,Calcium;Iron;Magnesium,0,0,Medium,,,,
-Caesar Salad,250,9,12,20,Vegetarian,Global,All,Medium,2,520,Vitamin K;Calcium;Folate,0,0,Medium,,,,
-Grilled Salmon,250,25,0,16,Pescatarian,Global,All,High,0,65,Omega3;B12;Vitamin D,0,0,Medium,,,,
-Turkey Sandwich,350,28,38,8,Non-Veg,Global,All,Low,3,680,B12;Selenium;Niacin,0,0,Medium,,,,
-Chicken Caesar Wrap,420,32,40,14,Non-Veg,Global,All,Medium,3,720,B12;Calcium;Selenium,0,0,Medium,,,,
-Veggie Burger,320,18,42,10,Vegan,Global,All,Medium,8,580,Iron;B12;Folate,0,0,Medium,,,,
-Pasta Primavera,380,14,62,10,Vegetarian,Global,All,Medium,5,420,Folate;Vitamin C;B vitamins,0,0,Medium,,,,
-Minestrone Soup,180,8,30,4,Vegan,Global,All,Low,8,680,Vitamin C;Iron;Folate,0,0,Medium,,,,
-Hummus with Pita,350,12,50,10,Vegan,Global,All,Low,6,580,Iron;Folate;Calcium,0,0,Medium,,,,
-Falafel Wrap,480,18,60,18,Vegan,Global,All,Low,10,620,Iron;Folate;Vitamin C,0,0,Medium,,,,
-Beef Steak,270,26,0,18,Non-Veg,Global,All,High,0,70,B12;Iron;Zinc;Selenium,0,0,Medium,,,,
-Lamb Chops,294,25,0,21,Non-Veg,Global,All,High,0,65,B12;Iron;Zinc,0,0,Medium,,,,
-Shrimp Stir Fry,220,24,14,8,Pescatarian,Global,All,Medium,2,680,Omega3;B12;Selenium,0,0,Medium,,,,
-Cod Fillet,90,20,0,1,Pescatarian,Global,All,Medium,0,65,B12;Selenium;Iodine,0,0,Medium,,,,
-Scrambled Eggs,210,14,2,16,Vegetarian,Global,All,Low,0,330,B12;Choline;Selenium,0,0,Medium,,,,
-Pancakes,350,8,58,10,Vegetarian,Global,All,Low,2,480,Calcium;B vitamins,0,0,Medium,,,,
-Granola Bowl,380,10,58,12,Vegan,Global,All,Medium,6,120,Iron;Magnesium;Antioxidants,0,0,Medium,,,,
-Fruit Smoothie,180,4,42,2,Vegan,Global,Summer,Low,5,60,Vitamin C;Potassium;Antioxidants,0,0,Medium,,,,
-Protein Shake,250,30,20,5,Non-Veg,Global,All,Medium,2,200,B12;Calcium;Iron,0,0,Medium,,,,
-Cottage Cheese,100,14,4,2,Vegetarian,Global,All,Low,0,360,Calcium;B12;Selenium,0,0,Medium,,,,
-Mozzarella Salad,220,12,6,16,Vegetarian,Global,Summer,Medium,1,380,Calcium;B12;Vitamin K,0,0,Medium,,,,
-Beef Tacos,380,24,36,14,Non-Veg,Global,All,Medium,4,680,B12;Iron;Zinc,0,0,Medium,,,,
-Chicken Burrito,560,38,62,18,Non-Veg,Global,All,Medium,6,1020,B12;Iron;Calcium,0,0,Medium,,,,
-Vegetable Curry,240,8,36,8,Vegan,Global,All,Low,7,520,Vitamin A;C;Iron,0,0,Medium,,,,
-Pad Thai,450,22,62,14,Pescatarian,Global,All,Medium,3,1100,B12;Magnesium;Niacin,0,0,Medium,,,,
-Sushi Roll,280,12,48,4,Pescatarian,Global,All,High,2,680,Omega3;B12;Iodine,0,0,Medium,,,,
-Miso Soup,80,6,8,3,Vegan,Global,All,Low,2,1010,Probiotics;B vitamins;Iron,0,0,Medium,,,,
-Fried Rice,380,12,60,12,Vegetarian,Global,All,Low,2,880,B vitamins;Iron,0,0,Medium,,,,
-Dumplings,320,14,40,12,Non-Veg,Global,All,Medium,2,680,B12;Iron;Zinc,0,0,Medium,,,,
-Pho Soup,350,28,38,8,Non-Veg,Global,All,Medium,2,980,B12;Iron;Zinc;Collagen,0,0,Medium,,,,
-Kimchi,25,2,4,0,Vegan,Global,All,Low,2,670,Probiotics;Vitamin C;K,0,0,Medium,,,,
-Butter Chicken,380,30,18,22,Non-Veg,Global,All,Medium,2,520,B12;Selenium;Zinc,0,0,Medium,,,,
-Palak Paneer,280,16,14,20,Vegetarian,Global,All,Medium,4,480,Calcium;Iron;Vitamin K,0,0,Medium,,,,
-Rajma Chawal,380,16,64,6,Vegan,Global,All,Low,12,420,Iron;Folate;Potassium,0,0,Medium,,,,
-Idli Sambar,220,8,40,3,Vegan,Global,All,Low,5,480,Iron;B vitamins;Probiotics,0,0,Medium,,,,
-Masoor Dal,210,14,32,3,Vegan,Global,All,Low,8,280,Iron;Folate;Zinc,0,0,Medium,,,,
-Chole Bhature,480,16,62,20,Vegan,Global,All,Medium,10,680,Iron;Folate;Magnesium,0,0,Medium,,,,
-Vegetable Samosa,180,4,24,8,Vegan,Global,All,Low,3,380,Vitamin C;Iron;B vitamins,0,0,Medium,,,,
-Paneer Tikka,290,22,8,20,Vegetarian,Global,All,Medium,1,480,Calcium;B12;Selenium,0,0,Medium,,,,
-Kebab Roll,380,24,42,14,Non-Veg,Global,All,Low,3,620,B12;Iron;Zinc,0,0,Medium,,,,
-Naan Bread,260,8,46,5,Vegetarian,Global,All,Low,2,480,B vitamins;Iron,0,0,Medium,,,,
-Raita,80,5,8,3,Vegetarian,Global,All,Low,0,220,Calcium;Probiotics;B12,0,0,Medium,,,,
-Chicken Soup,200,18,18,5,Non-Veg,Global,Winter,Low,2,820,B12;Zinc;Selenium,0,0,Medium,,,,
-Vegetable Soup,120,5,20,3,Vegan,Global,Winter,Low,6,580,Vitamin A;C;Folate,0,0,Medium,,,,
-Tomato Basil Soup,160,4,22,6,Vegan,Global,All,Low,3,680,Vitamin C;Lycopene;Folate,0,0,Medium,,,,
-Mushroom Risotto,380,10,58,12,Vegetarian,Global,All,Medium,3,580,B vitamins;Selenium;Iron,0,0,Medium,,,,
-Beef Burger,520,32,42,24,Non-Veg,Global,All,Medium,2,880,B12;Iron;Zinc,0,0,Medium,,,,
-Grilled Vegetables,120,4,20,4,Vegan,Global,Summer,Low,6,180,Vitamin A;C;Folate,0,0,Medium,,,,
-Caprese Salad,200,10,8,16,Vegetarian,Global,Summer,Medium,1,320,Calcium;Lycopene;Vitamin K,0,0,Medium,,,,
-Shakshuka,220,14,16,12,Vegetarian,Global,All,Low,3,520,B12;Iron;Lycopene,0,0,Medium,,,,
-Feta Omelette,240,18,4,18,Vegetarian,Global,All,Low,0,580,Calcium;B12;Selenium,0,0,Medium,,,,
-Lemon Herb Chicken,230,32,2,10,Non-Veg,Global,All,Medium,0,320,B12;Niacin;Selenium,0,0,Medium,,,,
-Baked Cod,160,30,0,4,Pescatarian,Global,All,Medium,0,320,B12;Selenium;Iodine,0,0,Medium,,,,
-Roast Turkey,210,30,0,10,Non-Veg,Global,All,Medium,0,480,B12;Zinc;Selenium,0,0,Medium,,,,
-Cheese Omelette,280,18,2,22,Vegetarian,Global,All,Low,0,520,Calcium;B12;Selenium,0,0,Medium,,,,
-Yogurt Parfait,250,12,38,5,Vegetarian,Global,All,Low,3,85,Calcium;Probiotics;B vitamins,0,0,Medium,,,,
-Trail Mix,450,14,42,28,Vegan,Global,All,Medium,6,80,Magnesium;Vitamin E;Iron,0,0,Medium,,,,
-Rice Cakes,70,1,16,0,Vegan,Global,All,Low,0,30,B vitamins,0,0,Medium,,,,
-Edamame,190,17,15,8,Vegan,Global,All,Medium,8,15,Iron;Folate;Magnesium,0,0,Medium,,,,
-Tzatziki with Veggies,110,5,10,6,Vegetarian,Global,Summer,Low,2,280,Calcium;Probiotics;Vitamin C,0,0,Medium,,,,
-Paratha (Plain),200,5,30,8,Vegetarian,Pakistan,All,Low,2,280,,0,0,High,Breakfast,General,Gluten,Easy
-Halwa Puri,520,10,75,22,Vegetarian,Pakistan,All,Low,3,450,,0,0,High,Breakfast,Weight Gain,Gluten,Medium
-Chana Puri,480,16,65,18,Vegan,Pakistan,All,Low,10,520,,0,0,Medium,Breakfast,Weight Gain;High Fiber,Gluten,Medium
-Dahi Roti,180,8,30,4,Vegetarian,Pakistan,All,Low,2,230,,1,1,Medium,Breakfast,Weight Loss;Balanced,Gluten;Dairy,Easy
-Lassi Sweet,180,8,25,5,Vegetarian,Pakistan,All,Low,0,120,,0,0,Medium,Breakfast,General;Weight Gain,Dairy,Easy
-Lassi Salted,100,8,10,3,Vegetarian,Pakistan,All,Low,0,300,,1,1,Low,Breakfast,Weight Loss;Balanced,Dairy,Easy
-Chicken Biryani,450,25,55,15,Non-Veg,Pakistan,All,Low,3,480,,0,0,High,Lunch;Dinner,Muscle Gain;Weight Gain,Dairy,Hard
-Fish Curry,290,24,12,16,Pescatarian,Pakistan,All,Low,2,400,,1,1,Low,Lunch;Dinner,Muscle Gain;Heart Health;Low Carb,Seafood,Medium
-Chicken Korma,420,28,15,28,Non-Veg,Pakistan,All,Low,2,480,,0,0,Low,Lunch;Dinner,Muscle Gain;Weight Gain,Dairy;Nuts,Hard
-Samosa Veg,180,4,24,8,Vegan,Pakistan,All,Low,3,380,,0,0,High,Snack,General,Gluten,Medium
-Quinoa Bowl,222,8,39,4,Vegan,Global,All,Low,5,13,,1,1,Low,Lunch;Dinner,High Fiber;Heart Health;Balanced,,Easy
-Almonds 30g,164,6,6,14,Vegan,Global,All,Low,4,1,,1,1,Low,Snack,Heart Health;Weight Loss;High Fiber,Nuts,Easy
-Walnuts 30g,185,4,4,18,Vegan,Global,All,Low,2,1,,1,1,Low,Snack,Heart Health;Brain Health,Nuts,Easy
-Sweet Potato Baked,103,2,24,0,Vegan,Global,All,Low,4,41,,1,1,Medium,Snack;Lunch,Weight Loss;High Fiber;Heart Health,,Easy
-Broccoli Steamed,55,4,11,1,Vegan,Global,All,Low,5,33,,1,1,Low,Lunch;Dinner,Weight Loss;Low Calorie;High Fiber,,Easy
-Cottage Cheese Snack,100,14,4,2,Vegetarian,Global,All,Low,0,360,,1,1,Low,Snack,Muscle Gain;Weight Loss;Low Carb,Dairy,Easy
+name,calories,protein,carbs,fat,fiber,sodium_mg,diet_type,country,season,budget,meal_type,micronutrients,glycemic_index_val,diabetes_friendly_flag,bp_friendly_flag
+Anda Paratha,280,12,28,14,2,320,Vegetarian,Pakistan,All,Low,Breakfast,"Iron,B12,Calcium",High,0,1
+Boiled Egg (2),155,13,1,11,0,140,Non-Veg,Global,All,Low,Breakfast,"B12,D,Choline",Low,0,1
+Omelette (2 eggs),185,14,2,13,0,250,Non-Veg,Global,All,Low,Breakfast,"B12,D,Selenium",Low,0,1
+Dahi (plain yogurt),100,8,11,3,0,70,Vegetarian,Pakistan,All,Low,Breakfast,"Calcium,Probiotics,B12",Low,0,1
+Paratha (plain),200,4,28,9,2,200,Vegetarian,Pakistan,All,Low,Breakfast,"Iron,B1",High,0,1
+Roti (1 whole wheat),100,4,20,1,3,130,Vegetarian,Pakistan,All,Low,"Breakfast,Lunch,Dinner","Iron,Fiber,B1",High,0,1
+Lassi (sweet),180,7,28,5,0,90,Vegetarian,Pakistan,Summer,Low,Breakfast,"Calcium,Probiotics",Low,0,1
+Namkeen Lassi,120,7,12,4,0,280,Vegetarian,Pakistan,Summer,Low,Breakfast,"Calcium,Probiotics",Low,0,1
+Doodh Pati Chai,120,5,14,5,0,80,Vegetarian,Pakistan,All,Low,Breakfast,Calcium,Low,0,1
+Green Tea,5,0,1,0,0,5,Vegan,Global,All,Low,Breakfast,Antioxidants,Low,0,1
+Oatmeal (plain),158,6,27,3,4,115,Vegan,Global,Winter,Low,Breakfast,"Iron,Fiber,B1,Manganese",Low,1,1
+Banana,105,1,27,0,3,1,Vegan,Global,All,Low,"Breakfast,Snack","K,B6,Mg",Low,1,1
+Apple,95,0,25,0,4,2,Vegan,Global,All,Low,"Breakfast,Snack","C,Fiber,Antioxidants",Low,1,1
+Fruit Chaat,120,2,28,1,4,60,Vegan,Pakistan,Summer,Low,"Breakfast,Snack","C,Fiber,K",High,0,1
+Egg Bhurji,200,14,4,13,1,360,Non-Veg,Pakistan,All,Low,Breakfast,"B12,D,Choline,Selenium",Low,0,1
+Besan Cheela,180,10,22,6,4,200,Vegan,Pakistan,All,Low,Breakfast,"Folate,Iron,Protein",Low,1,1
+Upma,210,7,35,6,3,280,Vegan,Pakistan,All,Low,Breakfast,"B1,Iron,Mg",High,0,1
+Poha (flattened rice),250,5,46,5,2,220,Vegan,Pakistan,All,Low,Breakfast,"Iron,B1",High,0,1
+Avocado Toast,220,6,24,12,6,300,Vegan,Global,All,Medium,Breakfast,"K,Folate,E,Fiber",Low,1,1
+Greek Yogurt (low fat),130,17,9,2,0,65,Vegetarian,Global,All,Medium,"Breakfast,Snack","Calcium,Probiotics,B12",Low,0,1
+Peanut Butter Toast,230,9,26,12,3,280,Vegan,Global,All,Low,Breakfast,"B3,Mg,Protein",Low,1,1
+Scrambled Eggs (2),180,13,2,13,0,220,Non-Veg,Global,All,Low,Breakfast,"B12,D,Selenium,Choline",Low,0,1
+Halwa Puri (small),420,8,55,19,3,380,Vegetarian,Pakistan,All,Low,Breakfast,"Iron,Carbs",High,0,1
+Suji Halwa,280,5,40,12,1,180,Vegetarian,Pakistan,All,Low,Breakfast,"Iron,B1",High,0,1
+Khichdi,220,9,38,4,3,250,Vegetarian,Pakistan,All,Low,"Breakfast,Lunch","Iron,Folate,Protein",High,0,1
+Dalia (porridge),190,7,35,3,5,160,Vegan,Pakistan,Winter,Low,Breakfast,"Fiber,Iron,B1,Mg",Low,1,1
+Fruit Smoothie,200,5,38,3,4,80,Vegetarian,Global,Summer,Low,"Breakfast,Snack","C,K,Folate",Medium,1,1
+Mango Lassi,220,7,38,5,1,95,Vegetarian,Pakistan,Summer,Low,"Breakfast,Snack","Calcium,A,C",Low,0,1
+Corn Flakes (with milk),200,8,38,3,2,210,Vegetarian,Global,All,Low,Breakfast,"D,B12,Calcium,Iron",Low,1,1
+Whole Wheat Bread (2sl),160,7,30,2,4,240,Vegan,Global,All,Low,Breakfast,"Fiber,Iron,B1",High,0,1
+Egg Mayo Sandwich,280,13,26,14,2,480,Non-Veg,Pakistan,All,Low,"Breakfast,Lunch","B12,Protein",Low,1,0
+Sattu Drink,150,6,28,2,4,120,Vegan,Pakistan,Summer,Low,Breakfast,"Iron,Protein,Fiber",Low,1,1
+Dates (5 pieces),140,1,38,0,3,1,Vegan,Pakistan,All,Low,"Breakfast,Snack","K,Iron,Fiber,Mg",Low,1,1
+Almonds (handful),164,6,6,14,3,1,Vegan,Global,All,Medium,"Breakfast,Snack","E,Mg,Ca,Protein",Low,1,1
+Walnuts (handful),185,4,4,18,2,1,Vegan,Global,All,Medium,"Breakfast,Snack","Omega3,Mg,E",Low,1,1
+Paratha Roll (chicken),380,20,38,16,2,420,Non-Veg,Pakistan,All,Low,"Breakfast,Lunch","Protein,B12,Iron",High,0,0
+Aloo Paratha,300,7,42,12,3,300,Vegetarian,Pakistan,All,Low,Breakfast,"K,B6,Fiber",High,0,1
+"Milk (full fat, 1 cup)",149,8,12,8,0,105,Vegetarian,Global,All,Low,"Breakfast,Snack","Calcium,D,B12",Low,0,1
+Watermelon (2 cups),84,2,21,0,1,3,Vegan,Pakistan,Summer,Low,"Breakfast,Snack","C,A,Lycopene",Low,0,1
+Daal Chawal,420,15,72,8,8,380,Vegan,Pakistan,All,Low,"Lunch,Dinner","Folate,Iron,Fiber,Protein",Low,1,1
+Daal Mash,280,16,35,8,9,320,Vegan,Pakistan,All,Low,"Lunch,Dinner","Folate,Iron,Protein,Fiber",Low,1,1
+Chicken Karahi (1 serving),380,32,8,24,2,520,Non-Veg,Pakistan,All,Low,"Lunch,Dinner","Protein,B12,Zinc",Low,1,0
+"Biryani (chicken, 1 plate)",480,28,60,16,2,580,Non-Veg,Pakistan,All,Low,"Lunch,Dinner","B12,Iron,Protein",High,0,0
+Chicken Pulao,420,25,55,12,2,480,Non-Veg,Pakistan,All,Low,"Lunch,Dinner","Protein,B12,Iron",High,0,0
+Grilled Chicken Breast,165,31,0,4,0,74,Non-Veg,Global,All,Medium,"Lunch,Dinner","Protein,B3,B6,Selenium",Low,0,1
+Palak Gosht,320,26,10,20,4,480,Non-Veg,Pakistan,Winter,Low,"Lunch,Dinner","Iron,A,Protein,K",Low,1,0
+Chana Masala,270,12,40,8,10,380,Vegan,Pakistan,All,Low,"Lunch,Dinner","Folate,Iron,Fiber,Protein",Low,1,1
+Rajma Chawal,380,15,62,6,11,340,Vegan,Pakistan,All,Low,"Lunch,Dinner","Folate,Iron,Protein,Fiber",Low,1,1
+Aloo Gobi,180,6,28,6,5,280,Vegan,Pakistan,Winter,Low,"Lunch,Dinner","C,K,Fiber",Medium,1,1
+Saag (Sarson),140,6,16,6,6,280,Vegetarian,Pakistan,Winter,Low,"Lunch,Dinner","K,A,Ca,Iron",Low,1,1
+Mutton Shorba (soup),180,18,6,10,1,460,Non-Veg,Pakistan,Winter,Low,"Lunch,Dinner","Protein,Zinc,B12,Iron",Low,0,0
+Chicken Sandwich (grilled),320,26,32,8,2,480,Non-Veg,Global,All,Low,Lunch,"Protein,B3,Fiber",Low,1,0
+Tuna Salad,200,25,5,9,2,320,Pescatarian,Global,All,Medium,Lunch,"Omega3,D,B12,Selenium",Low,1,1
+Vegetable Soup,120,5,18,3,4,380,Vegan,Global,Winter,Low,"Lunch,Dinner","A,C,Fiber",Low,1,1
+Lentil Soup (Masoor),230,14,34,4,8,360,Vegan,Pakistan,Winter,Low,"Lunch,Dinner","Iron,Folate,Fiber,Protein",Low,1,1
+Caesar Salad (grilled chicken),280,22,14,16,3,520,Non-Veg,Global,All,Medium,Lunch,"A,K,Protein,Calcium",Low,1,0
+Quinoa Bowl (veg),320,12,48,9,7,280,Vegan,Global,All,Medium,"Lunch,Dinner","Complete protein,Fiber,Iron,Mg",Low,1,1
+Chicken Wrap,360,28,36,12,3,520,Non-Veg,Global,All,Low,Lunch,"Protein,B3,Fiber",Medium,1,0
+Mixed Vegetable Rice,280,6,52,5,4,300,Vegan,Pakistan,All,Low,"Lunch,Dinner","B1,Iron,Fiber",High,0,1
+Fish Karahi,290,28,8,16,1,480,Pescatarian,Pakistan,All,Medium,"Lunch,Dinner","Omega3,D,B12,Protein",Low,0,0
+Daal Tadka,240,13,32,7,7,340,Vegan,Pakistan,All,Low,"Lunch,Dinner","Folate,Iron,Protein,Fiber",Low,1,1
+Seekh Kebab (2 pieces),240,22,6,14,1,380,Non-Veg,Pakistan,All,Low,"Lunch,Dinner","Protein,Zinc,B12,Iron",Low,0,1
+Chicken Tikka (3 pieces),280,32,4,14,1,420,Non-Veg,Pakistan,All,Low,"Lunch,Dinner","Protein,B3,B6,Selenium",Low,0,0
+Paya Soup,200,18,8,12,0,460,Non-Veg,Pakistan,Winter,Low,"Lunch,Dinner","Collagen,Protein,Calcium",Low,0,0
+Haleem (1 cup),300,20,28,12,5,460,Non-Veg,Pakistan,Winter,Low,"Lunch,Dinner","Iron,Protein,Fiber,B12",Medium,1,0
+Pasta Primavera,350,12,58,9,5,380,Vegetarian,Global,All,Medium,"Lunch,Dinner","Fiber,C,Folate",High,0,1
+Black Bean Bowl,310,14,48,6,12,320,Vegan,Global,All,Low,"Lunch,Dinner","Folate,Iron,Fiber,Protein",Medium,1,1
+Hummus with Pita,320,11,44,13,7,480,Vegan,Global,All,Low,"Lunch,Snack","Iron,Folate,Protein,Fiber",Low,1,0
+Shwarma (chicken),420,26,44,16,3,580,Non-Veg,Pakistan,All,Low,"Lunch,Dinner","Protein,B12,Iron",High,0,0
+Grilled Salmon,280,28,0,16,0,80,Pescatarian,Global,All,High,Dinner,"Omega3,D,B12,Selenium",Low,0,1
+"Chicken Thigh (skinless, grilled)",210,26,0,10,0,120,Non-Veg,Global,All,Low,Dinner,"Protein,B3,B6,Zinc",Low,0,1
+Beef Steak (lean),250,28,0,14,0,65,Non-Veg,Global,All,High,Dinner,"Iron,Zinc,B12,Protein",Low,0,1
+Lamb Chops (grilled),294,25,0,21,0,80,Non-Veg,Global,All,High,Dinner,"Iron,Zinc,B12,Protein",Low,0,0
+Grilled Fish (tilapia),218,30,0,10,0,90,Pescatarian,Global,All,Medium,Dinner,"Protein,D,B12,Selenium",Low,0,1
+Nihari (1 bowl),450,32,18,28,2,580,Non-Veg,Pakistan,Winter,Low,Dinner,"Iron,Protein,Collagen,B12",Medium,1,0
+Mutton Karahi,420,32,6,30,1,520,Non-Veg,Pakistan,All,Medium,Dinner,"Iron,Protein,Zinc,B12",Low,0,0
+Beef Karahi,400,34,6,26,1,500,Non-Veg,Pakistan,All,Medium,Dinner,"Iron,Protein,Zinc,B12",Low,0,0
+Tofu Stir Fry,210,16,18,10,4,480,Vegan,Global,All,Medium,Dinner,"Calcium,Iron,Protein,K",Low,1,0
+Palak Paneer,280,14,12,18,4,380,Vegetarian,Pakistan,All,Medium,Dinner,"Ca,Iron,A,Protein",Low,1,1
+Methi Chicken,290,28,10,16,3,400,Non-Veg,Pakistan,Winter,Low,Dinner,"Iron,K,Protein,A",Low,1,1
+Karahi Gosht,380,30,6,26,1,480,Non-Veg,Pakistan,All,Medium,Dinner,"Iron,Zinc,B12,Protein",Low,0,0
+Tandoori Chicken (2 pieces),260,32,4,12,1,360,Non-Veg,Pakistan,All,Low,Dinner,"Protein,B6,Selenium,Zinc",Low,0,1
+Dal Makhani,320,14,36,14,8,480,Vegetarian,Pakistan,All,Low,Dinner,"Iron,Folate,Protein,Ca",Low,1,0
+Chicken Kofta Curry,340,26,12,20,2,500,Non-Veg,Pakistan,All,Low,Dinner,"Protein,Iron,B12,Zinc",Low,1,0
+Shrimp Stir Fry,220,24,14,8,3,580,Pescatarian,Global,All,Medium,Dinner,"Iodine,Selenium,B12,Protein",Low,1,0
+Egg Curry (2 eggs),260,16,8,18,2,420,Non-Veg,Pakistan,All,Low,Dinner,"B12,D,Choline,Protein",Low,1,0
+Achar Gosht,360,28,8,24,2,540,Non-Veg,Pakistan,All,Low,Dinner,"Iron,Protein,Zinc,B12",Low,1,0
+Bhindi Masala,160,4,22,7,5,280,Vegan,Pakistan,Summer,Low,Dinner,"C,K,Folate,Mg",Low,1,1
+Baingan Bharta,140,4,18,6,5,260,Vegan,Pakistan,Summer,Low,Dinner,"K,Mg,Fiber,B1",Low,1,1
+Karela Masala,120,4,16,5,4,240,Vegan,Pakistan,Summer,Low,Dinner,"C,K,Iron,A",Low,1,1
+Keema (mince meat),350,28,6,24,1,460,Non-Veg,Pakistan,All,Low,Dinner,"Iron,Zinc,B12,Protein",Low,0,0
+Chicken Soup,180,20,10,6,2,480,Non-Veg,Global,Winter,Low,Dinner,"Protein,Electrolytes,Collagen",Low,1,0
+"Makhana (fox nuts, 1 cup)",100,3,20,1,1,80,Vegan,Pakistan,All,Low,Snack,"Ca,Mg,Protein",Low,0,1
+Roasted Chickpeas,120,6,20,3,5,180,Vegan,Pakistan,All,Low,Snack,"Iron,Folate,Protein,Fiber",Low,1,1
+Fruit Salad (1 bowl),100,1,24,0,3,10,Vegan,Global,Summer,Low,Snack,"C,K,Folate,Fiber",Low,1,1
+Protein Shake,200,25,12,4,2,150,Non-Veg,Global,All,Medium,Snack,"B12,Calcium,Protein,D",Low,1,1
+Boiled Chickpeas,180,10,28,4,8,120,Vegan,Pakistan,All,Low,Snack,"Iron,Folate,Fiber,Protein",Low,1,1
+Mixed Nuts (30g),180,5,8,16,2,5,Vegan,Global,All,Medium,Snack,"E,Mg,Healthy fats,Protein",Low,1,1
+Rice Cakes (2),70,1,15,0,0,80,Vegan,Global,All,Low,Snack,Low cal option,High,0,1
+Cucumber Slices with Hummus,110,5,14,5,4,200,Vegan,Global,Summer,Low,Snack,"C,K,Folate,Iron",Low,1,1
+String Cheese,80,7,1,5,0,200,Vegetarian,Global,All,Medium,Snack,"Calcium,Protein,B12",Low,0,1
+Hard Boiled Egg,78,6,1,5,0,62,Non-Veg,Global,All,Low,Snack,"B12,D,Choline",Low,0,1
+Peanuts (handful),160,7,5,14,2,5,Vegan,Pakistan,All,Low,Snack,"B3,Mg,Protein,E",Low,1,1
+Yogurt with Honey,150,8,22,3,0,80,Vegetarian,Global,All,Low,Snack,"Calcium,Probiotics,B12",Low,0,1
+Orange,62,1,15,0,3,0,Vegan,Pakistan,Winter,Low,Snack,"C,Folate,Fiber",Low,1,1
+Pomegranate (1/2),83,2,19,1,4,3,Vegan,Pakistan,Winter,Low,Snack,"C,K,Folate,Antioxidants",Low,1,1
+Chaat Papri (small),180,4,28,6,2,400,Vegetarian,Pakistan,All,Low,Snack,"Carbs,Fiber",High,0,1
+"Samosa (1, baked)",150,4,22,6,2,280,Vegetarian,Pakistan,All,Low,Snack,"Iron,B1",High,0,1
+Minestrone Soup,180,8,30,4,6,480,Vegan,Global,Winter,Medium,"Lunch,Dinner","A,C,Fiber,Iron",Medium,1,0
+Greek Salad,160,5,10,12,3,480,Vegetarian,Global,Summer,Medium,Lunch,"Ca,K,C,Antioxidants",Low,1,0
+Sushi Roll (8 pcs),300,14,48,6,2,580,Pescatarian,Global,All,High,"Lunch,Dinner","Omega3,D,B12,Iodine",High,0,0
+Grilled Vegetables,120,4,18,5,5,200,Vegan,Global,Summer,Low,Dinner,"C,K,Folate,Fiber",Low,1,1
+Edamame (1 cup),189,17,16,8,8,9,Vegan,Global,All,Medium,Snack,"Complete protein,Fiber,Iron,Folate",Low,1,1
+Couscous Salad,250,8,46,4,5,280,Vegan,Global,All,Medium,Lunch,"Fiber,Folate,B1,Iron",High,0,1
+Baked Cod,180,26,0,7,0,100,Pescatarian,Global,All,Medium,Dinner,"Protein,D,B12,Selenium",Low,0,1
+Turkey Meatballs,220,22,8,11,1,380,Non-Veg,Global,All,Medium,Dinner,"Protein,B12,Zinc,Iron",Low,0,1
+Spinach Omelette,190,16,3,13,1,300,Non-Veg,Global,All,Low,Breakfast,"Iron,A,K,B12",Low,0,1
+Cottage Cheese (1 cup),206,28,8,9,0,820,Vegetarian,Global,All,Medium,"Breakfast,Snack","Calcium,B12,Selenium,Protein",Low,0,0
+Brown Rice (1 cup cooked),216,5,45,2,4,10,Vegan,Global,All,Low,"Lunch,Dinner","Mg,B1,Fiber,Mn",Low,1,1
+Sweet Potato (baked),103,2,24,0,4,41,Vegan,Global,Winter,Low,Dinner,"A,K,B6,Fiber",Low,1,1
+"Broccoli (steamed, 1 cup)",55,4,11,1,5,64,Vegan,Global,All,Low,Dinner,"C,K,Folate,Fiber",Low,1,1
+Spinach Salad,60,4,8,1,3,90,Vegan,Global,All,Low,"Lunch,Dinner","K,A,Iron,Folate",Low,1,1
+Lemon Grilled Chicken,195,30,2,7,0,160,Non-Veg,Global,All,Low,"Lunch,Dinner","Protein,B3,B6,Selenium",Low,0,1
+Veggie Burger,280,14,38,8,6,500,Vegan,Global,All,Medium,Lunch,"Fiber,Iron,Protein",Low,1,0
+Falafel Plate,340,14,40,15,9,480,Vegan,Global,All,Low,"Lunch,Dinner","Iron,Folate,Fiber,Protein",Medium,1,0
+Caprese Salad,200,12,6,15,1,380,Vegetarian,Global,Summer,Medium,Lunch,"Calcium,K,A,Protein",Low,0,1
+Kheer (small bowl),200,6,34,6,0,80,Vegetarian,Pakistan,All,Low,Snack,"Calcium,B12",High,0,1
+Gulab Jaman (1 pc),150,3,28,5,0,60,Vegetarian,Pakistan,All,Low,Snack,"Calcium,Carbs",High,0,1
+Sheer Khurma (small),240,7,38,8,1,90,Vegetarian,Pakistan,All,Low,Snack,"Calcium,Dates,Nuts",High,0,1
