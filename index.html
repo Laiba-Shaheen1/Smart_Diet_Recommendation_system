@@ -1433,6 +1433,9 @@ async function removeFood(name) {
 // ────────────────────────────────────────────
 //  AI CHATBOT
 // ────────────────────────────────────────────
+f// ────────────────────────────────────────────
+//  AI CHATBOT
+// ────────────────────────────────────────────
 function toggleChat() {
   chatOpen = !chatOpen;
   document.getElementById('chatbot').classList.toggle('open', chatOpen);
@@ -1483,11 +1486,8 @@ async function sendChat() {
   document.getElementById('chat-suggestions').style.display = 'none';
 
   appendMsg(text, 'user');
-  chatHistory.push({ role: 'user', content: text });
-
   showTyping();
 
-  // Build context from current results
   let context = '';
   if (lastResult) {
     const m = lastResult.adjusted_macros || lastResult.macros;
@@ -1500,28 +1500,30 @@ ${context ? 'Current user context: ' + context : 'No plan generated yet — give
 
 Keep responses concise, friendly, and practical. Use short paragraphs or bullet points for clarity. If a question requires medical advice beyond nutrition, recommend consulting a doctor. Always be encouraging and supportive.`;
 
+  chatHistory.push({ role: 'user', content: text });
+  const cleanHistory = chatHistory.filter(m => m.role === 'user' || m.role === 'assistant');
+
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('http://127.0.0.1:5003/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
         system: systemPrompt,
-        messages: chatHistory.slice(-10),
+        history: cleanHistory.slice(-10),
       })
     });
 
     const data = await response.json();
     removeTyping();
 
-    const reply = data.content?.[0]?.text || 'Sorry, I could not get a response. Please try again.';
+    const reply = data.reply || 'Sorry, no response.';
     chatHistory.push({ role: 'assistant', content: reply });
     appendMsg(reply, 'bot');
 
   } catch (err) {
     removeTyping();
-    appendMsg('⚠️ Unable to connect to AI. Please check your connection and try again.', 'bot');
+    console.error('Fetch error:', err);
+    appendMsg('⚠️ Unable to connect. Make sure Flask server is running.', 'bot');
   }
 
   document.getElementById('chat-send').disabled = false;

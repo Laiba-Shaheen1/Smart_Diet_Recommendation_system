@@ -468,6 +468,24 @@ def search_foods():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
+
+import anthropic
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.json
+    history = data.get("history", [])
+    system_prompt = data.get("system", "You are a helpful nutritionist.")
+
+    client = anthropic.Anthropic(api_key="YOUR_API_KEY_HERE")
+    response = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1000,
+        system=system_prompt,
+        messages=history
+    )
+
+    return jsonify({"reply": response.content[0].text})
 # ═══════════════════════════════════════════════════════════
 #  HOME
 # ═══════════════════════════════════════════════════════════
